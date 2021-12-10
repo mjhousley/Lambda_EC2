@@ -1,0 +1,5 @@
+Commands
+aws cloudformation create-stack --stack-name ec2start1 --template-body file://cf-ec2.yaml
+aws cloudformation deploy --template-file ec2lambda-m.yml --stack-name LambdaStartStop --capabilities CAPABILITY_IAM
+aws cloudformation update-stack --stack-name LambdaStartStop --template-body file://ec2lambda-m.yml --capabilities CAPABILITY_IAM
+aws ec2 describe-instances | grep InstanceId
