@@ -2,14 +2,20 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: Part 1 - Build a webapp stack with CloudFormation
 
 Resources:
-  WebAppInstance:
+  Server1:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0d5eff06f840b45e9 # ImageID valid only in us-east-1 region
+      ImageId: ami-0ed9277fb7eb570c9 # ImageID valid only in us-east-1 region
       InstanceType: t2.micro
+      Tags:
+        - Key: Name
+          Value: SS1
       
   Server2:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-0d5eff06f840b45e9 # ImageID valid only in us-east-1 region
+      ImageId: ami-0ed9277fb7eb570c9 # ImageID valid only in us-east-1 region
       InstanceType: t2.micro
+      Tags:
+        - Key: Name
+          Value: SS2

@@ -1,5 +1,22 @@
 Commands
-aws cloudformation create-stack --stack-name ec2start1 --template-body file://cf-ec2.yaml
-aws cloudformation deploy --template-file ec2lambda-m.yml --stack-name LambdaStartStop --capabilities CAPABILITY_IAM
-aws cloudformation update-stack --stack-name LambdaStartStop --template-body file://ec2lambda-m.yml --capabilities CAPABILITY_IAM
+# Create Cloudformation Stack 
+aws cloudformation create-stack --stack-name ec2create --template-body file://cf-ec2.yaml
+
+# Find InstanceID of EC2 instances
 aws ec2 describe-instances | grep InstanceId
+
+# Stop EC2 Instances
+aws ec2 stop-instances --instance-ids i-011a1a0034717ac60 i-0a56baf06f4c2c6cc
+
+# Deploy Cloudformation template with capabilities to assume permissions needed to complete tasks
+aws cloudformation deploy --template-file ec2lambda-m.yml --stack-name LambdaStartStop --capabilities CAPABILITY_IAM
+
+# Update Current Stack
+aws cloudformation update-stack --stack-name LambdaStartStop --template-body file://ec2lambda-m.yml --capabilities CAPABILITY_IAM
+
+# Delete a Cloudformation Stack
+aws cloudformation delete-stack --stack-name ec2create
+
+# Find an EC2 InstanceID by flitering by Name & querying the results
+aws ec2 describe-instances --filters 'Name=tag:Name,Values=SS*' \
+--output text --query 'Reservations[*].Instances[*].InstanceId'
